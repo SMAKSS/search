@@ -1,0 +1,35 @@
+{
+  "name": "@smakss/search",
+  "version": "1.0.0",
+  "description": "Search through array and/or objects for sepcific keyword.",
+  "type": "module",
+  "main": "./index.cjs",
+  "exports": {
+    "import": "./index.mjs",
+    "require": "./index.cjs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SMAKSS/search.git"
+  },
+  "keywords": [
+    "npm",
+    "yarn",
+    "search",
+    "Array",
+    "Object",
+    "SMAKSS",
+    "CommonJS",
+    "EcmaScript",
+    "Nested array",
+    "Nested object",
+    "Search in arrays",
+    "Search in objects"
+  ],
+  "author": "SMAKSS",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/SMAKSS/search/issues"
+  },
+  "homepage": "https://github.com/SMAKSS/search#readme"
+}
