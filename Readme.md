@@ -42,7 +42,7 @@ If the matching element was in object it will return the whole object.
 ```
 const obj = { name: "John", lastName: "Doe" };
 
-Search({ searchText: "john", searchItems: array });
+Search({ searchText: "john", searchItems: obj });
 
 // Result: [{ lastName: "Doe", name: "John" }]
 ```
