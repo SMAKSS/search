@@ -17,13 +17,13 @@ yarn add @smakss/search
 to include it with common js module you should do this:
 
 ```
-var search = require('@smakss/search');
+var Search = require('@smakss/search');
 ```
 
 and to include it with ECMAscript module you can simply do this one:
 
 ```
-import search from '@smakss/search';
+import Search from '@smakss/search';
 ```
 
 then to use it within your application you can do it just like below:
@@ -33,7 +33,7 @@ The search function will accept 4 input parameter:
 - `searchText` (`String`): The string that you want to look for in your element (It will match the whole string without regards to case sensitivity).
 - `searchItems` (`Object|Array`): Element that you want to perform a search on it.
 - `keys` (`Array`): Keys to include or exclude in your object items. If you exclude them it will exclude them from search and search won't perform on those specific keys. And if you include them search will only perform on those desired keys and it will ignore others.
-- `include` (`Boolean`): A flag to determine whether the `keys` are included or excluded. 
+- `include` (`Boolean`): A flag to determine whether the `keys` are included or excluded. It will be `True` by default, which means the keys will be included. 
 
 ## Examples of usage
 
@@ -42,7 +42,7 @@ If the matching element was in object it will return the whole object.
 ```
 const obj = { name: "John", lastName: "Doe" };
 
-search({ searchText: "john", searchItems: array });
+Search({ searchText: "john", searchItems: array });
 
 // Result: [{ lastName: "Doe", name: "John" }]
 ```
@@ -54,7 +54,7 @@ const arr = [
   { name: "Joe", lastName: "Doe" }
 ];
 
-search({ searchText: "john", searchItems: arr });
+Search({ searchText: "john", searchItems: arr });
 
 // Result: [{ lastName: "Doe", name: "John" }]
 ```
@@ -67,9 +67,36 @@ const arr = [
   [{ name: "Jane", lastName: "Doe" }]
 ];
 
-search({ searchText: "jane", searchItems: arr });
+Search({ searchText: "jane", searchItems: arr });
 
 // Result: [{ lastName: "Doe", name: "Jane" }]
+```
+
+**Passing a nested array with including keys:**
+```
+const arr = [
+  { name: "John", lastName: "Doe" },
+  { name: "Joe", lastName: "Doe" },
+  [{ name: "Jane", lastName: "Doe" }]
+];
+
+Search({ searchText: "jane", searchItems: arr, keys: ['name'] });
+
+// Result: [{ lastName: "Doe", name: "Jane" }]
+```
+
+**Passing a nested array with excluding keys:**
+```
+const arr = [
+  { name: "John", lastName: "Doe" },
+  { name: "Joe", lastName: "Doe" },
+  [{ name: "Jane", lastName: "Doe" }]
+];
+
+Search({ searchText: "jane", searchItems: arr, keys: ['name'], include: false });
+
+// Result: []
+// The result will be an empty array when nothing matches with the provided params
 ```
 
 ## Demo

@@ -1,5 +1,5 @@
 'use strict';
-function searchInKeys(searchItem, filtered, keys, include, regex) {
+function SearchInKeys(searchItem, filtered, keys, include, regex) {
   if (
     typeof searchItem !== 'object' &&
     Boolean(searchItem.toString().match(regex)) &&
@@ -18,19 +18,19 @@ function searchInKeys(searchItem, filtered, keys, include, regex) {
   });
 }
 
-function searchInElements(searchItems, filtered, keys, include, regex) {
+function SearchInElements(searchItems, filtered, keys, include, regex) {
   if (Array.isArray(searchItems)) {
     searchItems.forEach((arr) => {
       Array.isArray(searchItems)
-        ? searchInElements(arr, filtered, keys, include, regex)
-        : searchInKeys(arr, filtered, keys, include, regex);
+        ? SearchInElements(arr, filtered, keys, include, regex)
+        : SearchInKeys(arr, filtered, keys, include, regex);
     });
   } else {
-    searchInKeys(searchItems, filtered, keys, include, regex);
+    SearchInKeys(searchItems, filtered, keys, include, regex);
   }
 }
 
-function search({
+function Search({
   searchText = '',
   searchItems = [],
   keys = [],
@@ -39,8 +39,8 @@ function search({
   const regex = new RegExp(searchText, 'i'),
     filtered = [];
 
-  searchInElements(searchItems, filtered, keys, include, regex);
+  SearchInElements(searchItems, filtered, keys, include, regex);
   return filtered;
 }
 
-module.exports = search;
+module.exports = Search;
