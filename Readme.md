@@ -101,4 +101,4 @@ Search({ searchText: "jane", searchItems: arr, keys: ['name'], include: false })
 
 ## Demo
 
-You can check the [working demo](https://runkit.com/smakss/search) in runkit.
+You can check the [working demo](https://runkit.com/smakss/5f738b7f464579001bfda2d0) in runkit.
