@@ -33,7 +33,8 @@ The search function will accept 4 input parameter:
 - `searchText` (`String`): The string that you want to look for in your element (It will match the whole string without regards to case sensitivity).
 - `searchItems` (`Object|Array`): Element that you want to perform a search on it.
 - `keys` (`Array`): Keys to include or exclude in your object items. If you exclude them it will exclude them from search and search won't perform on those specific keys. And if you include them search will only perform on those desired keys and it will ignore others.
-- `include` (`Boolean`): A flag to determine whether the `keys` are included or excluded. It will be `True` by default, which means the keys will be included. 
+- `include` (`Boolean`): A flag to determine whether the `keys` are included or excluded. It will be `True` by default, which means the keys will be included.
+- `exact` (`Boolean`): A flag to determine whether the you are exactly looking for `searchText` string or not. It will be `False` by default, which means it will not looking for exact `searchText`. e. g. Let's say `searchText` is `5` so it will match all numbers where they include `5` *(`5`, `15`, `25`, ...)* otherwise it will only match `5` alone. This feature is only available in `v1.0.6+`.
 
 ## Examples of usage
 
@@ -97,6 +98,20 @@ Search({ searchText: "jane", searchItems: arr, keys: ['name'], include: false })
 
 // Result: []
 // The result will be an empty array when nothing matches with the provided params
+```
+
+**Passing a nested array with exact search *(Only available in `v1.0.6+`)*:**
+```
+const arr = [
+  { name: "John", lastName: "Doe" },
+  { name: "Janet", lastName: "Doe" },
+  [{ name: "Jane", lastName: "Doe" }]
+];
+
+Search({ searchText: "jane", searchItems: arr, exact: true });
+
+// Result: [{ name: "Jane", lastName: "Doe" }]
+// It will only match Jane and not Janet
 ```
 
 ## Demo
