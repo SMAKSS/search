@@ -8,7 +8,7 @@ Searching through arrays or objects might be easy these days with array helpers 
 
 To install it you can simply do the following command:
 
-```
+```bash
 npm i @smakss/search
 or
 yarn add @smakss/search
@@ -16,13 +16,13 @@ yarn add @smakss/search
 
 to include it with common js module you should do this:
 
-```
+```js
 var Search = require('@smakss/search');
 ```
 
 and to include it with ECMAscript module you can simply do this one:
 
-```
+```js
 import Search from '@smakss/search';
 ```
 
@@ -40,6 +40,7 @@ The search function will accept 4 input parameter:
 
 **Passing an object:**
 If the matching element was in object it will return the whole object.
+
 ```js
 const obj = { name: "John", lastName: "Doe" };
 
