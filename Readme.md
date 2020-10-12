@@ -2,7 +2,7 @@
 
 ![npm](https://img.shields.io/npm/v/@smakss/search) ![Snyk Vulnerabilities for npm package](https://img.shields.io/snyk/vulnerabilities/npm/@smakss/search) ![NPM](https://img.shields.io/npm/l/@smakss/search) ![npm](https://img.shields.io/npm/dt/@smakss/search) ![npm bundle size (scoped)](https://img.shields.io/bundlephobia/min/@smakss/search)
 
-Searching through arrays or objects might be easy these days with array helpers like [filter](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter), but what if you have a nested array of object and want to search into every key of your object with a specific keyword? This might be hard or frustrating sometimes, this package will help you to achieve search a keyword through each object key, array elements and/or nested arrays. Also, this package uses ES6+ syntax so if you using older standards for writing JS code you may need a transpiler for it.
+Searching through arrays or objects might be easy these days with array helpers like [filter](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter) or libraries like [_lodash](https://www.npmjs.com/package/lodash), but what if you want a lighter library and have a nested array of object and want to search into every key of your object with a specific keyword? This might be hard or frustrating sometimes, this package will help you to achieve search a keyword through each object key, array elements and/or nested arrays. Also, this package uses ES6+ syntax so if you using older standards for writing JS code you may need a transpiler for it.
 
 ## How it works?
 
@@ -40,7 +40,7 @@ The search function will accept 4 input parameter:
 
 **Passing an object:**
 If the matching element was in object it will return the whole object.
-```
+```js
 const obj = { name: "John", lastName: "Doe" };
 
 Search({ searchText: "john", searchItems: obj });
@@ -49,7 +49,7 @@ Search({ searchText: "john", searchItems: obj });
 ```
 
 **Passing an array:**
-```
+```js
 const arr = [
   { name: "John", lastName: "Doe" },
   { name: "Joe", lastName: "Doe" }
@@ -61,7 +61,7 @@ Search({ searchText: "john", searchItems: arr });
 ```
 
 **Passing a nested array:**
-```
+```js
 const arr = [
   { name: "John", lastName: "Doe" },
   { name: "Joe", lastName: "Doe" },
@@ -74,7 +74,7 @@ Search({ searchText: "jane", searchItems: arr });
 ```
 
 **Passing a nested array with including keys:**
-```
+```js
 const arr = [
   { name: "John", lastName: "Doe" },
   { name: "Joe", lastName: "Doe" },
@@ -87,7 +87,7 @@ Search({ searchText: "jane", searchItems: arr, keys: ['name'] });
 ```
 
 **Passing a nested array with excluding keys:**
-```
+```js
 const arr = [
   { name: "John", lastName: "Doe" },
   { name: "Joe", lastName: "Doe" },
@@ -101,7 +101,7 @@ Search({ searchText: "jane", searchItems: arr, keys: ['name'], include: false })
 ```
 
 **Passing a nested array with exact search *(Only available in `v1.0.6+`)*:**
-```
+```js
 const arr = [
   { name: "John", lastName: "Doe" },
   { name: "Janet", lastName: "Doe" },
