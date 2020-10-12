@@ -49,6 +49,7 @@ Search({ searchText: "john", searchItems: obj });
 ```
 
 **Passing an array:**
+
 ```js
 const arr = [
   { name: "John", lastName: "Doe" },
@@ -61,6 +62,7 @@ Search({ searchText: "john", searchItems: arr });
 ```
 
 **Passing a nested array:**
+
 ```js
 const arr = [
   { name: "John", lastName: "Doe" },
@@ -74,6 +76,7 @@ Search({ searchText: "jane", searchItems: arr });
 ```
 
 **Passing a nested array with including keys:**
+
 ```js
 const arr = [
   { name: "John", lastName: "Doe" },
@@ -87,6 +90,7 @@ Search({ searchText: "jane", searchItems: arr, keys: ['name'] });
 ```
 
 **Passing a nested array with excluding keys:**
+
 ```js
 const arr = [
   { name: "John", lastName: "Doe" },
@@ -101,6 +105,7 @@ Search({ searchText: "jane", searchItems: arr, keys: ['name'], include: false })
 ```
 
 **Passing a nested array with exact search *(Only available in `v1.0.6+`)*:**
+
 ```js
 const arr = [
   { name: "John", lastName: "Doe" },
