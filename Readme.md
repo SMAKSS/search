@@ -38,8 +38,9 @@ The search function will accept 4 input parameter:
 
 ## Examples of usage
 
-**Passing an object:**
-If the matching element was in object it will return the whole object.
+### Passing an object
+
+If the matching element was in object it will return the whole object:
 
 ```js
 const obj = { name: "John", lastName: "Doe" };
@@ -49,7 +50,7 @@ Search({ searchText: "john", searchItems: obj });
 // Result: [{ lastName: "Doe", name: "John" }]
 ```
 
-**Passing an array:**
+### Passing an array
 
 ```js
 const arr = [
@@ -62,7 +63,7 @@ Search({ searchText: "john", searchItems: arr });
 // Result: [{ lastName: "Doe", name: "John" }]
 ```
 
-**Passing a nested array:**
+### Passing a nested array
 
 ```js
 const arr = [
@@ -76,7 +77,7 @@ Search({ searchText: "jane", searchItems: arr });
 // Result: [{ lastName: "Doe", name: "Jane" }]
 ```
 
-**Passing a nested array with including keys:**
+### Passing a nested array with including keys
 
 ```js
 const arr = [
@@ -90,7 +91,7 @@ Search({ searchText: "jane", searchItems: arr, keys: ['name'] });
 // Result: [{ lastName: "Doe", name: "Jane" }]
 ```
 
-**Passing a nested array with excluding keys:**
+### Passing a nested array with excluding keys
 
 ```js
 const arr = [
@@ -102,10 +103,12 @@ const arr = [
 Search({ searchText: "jane", searchItems: arr, keys: ['name'], include: false });
 
 // Result: []
-// The result will be an empty array when nothing matches with the provided params
 ```
+<sub>The result will be an empty array because we exclude the `name` key from the search so nothing will be matched with the provided params.</sub>
 
-**Passing a nested array with exact search *(Only available in `v1.0.6+`)*:**
+### Passing a nested array with exact search 
+
+<sub>(Only available in `v1.0.6+`)</sub>
 
 ```js
 const arr = [
@@ -117,8 +120,9 @@ const arr = [
 Search({ searchText: "jane", searchItems: arr, exact: true });
 
 // Result: [{ name: "Jane", lastName: "Doe" }]
-// It will only match Jane and not Janet
 ```
+
+<sub>It will only match Jane and not Janet.</sub>
 
 ## Demo
 
