@@ -1,7 +1,7 @@
 {
   "name": "@smakss/search",
-  "version": "1.0.8",
-  "description": "Search through array and/or objects for sepcific keyword.",
+  "version": "1.0.9",
+  "description": "Search through array and/or objects for specific keyword.",
   "type": "module",
   "main": "./index.cjs",
   "exports": {
