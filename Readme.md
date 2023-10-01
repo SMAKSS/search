@@ -4,6 +4,14 @@
 
 Searching through arrays or objects might be easy these days with array helpers like [filter](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter) or libraries like [\_lodash](https://www.npmjs.com/package/lodash), but what if you want a lighter library and have a nested array of object and want to search into every key of your object with a specific keyword? This might be hard or frustrating sometimes, this package will help you to achieve search a keyword through each object key, array elements and/or nested arrays. Also, this package uses ES6+ syntax so if you using older standards for writing JS code you may need a transpiler for it.
 
+## Demo
+
+You can check the [working demo](https://runkit.com/smakss/5f738b7f464579001bfda2d0) in runkit.
+
+or
+
+[![View @smakss/search](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/smakss-search-zlqtu3?fontsize=14&hidenavigation=1&theme=dark)
+
 ## How it works?
 
 To install it you can simply do the following command:
@@ -130,10 +138,10 @@ Search({ searchText: "jane", searchItems: arr, exact: true });
 
 <sub>It will only match Jane and not Janet.</sub>
 
-## Demo
+## Contributing
 
-You can check the [working demo](https://runkit.com/smakss/5f738b7f464579001bfda2d0) in runkit.
+Interested in making contributions to this project? Please see [CONTRIBUTING.md](https://github.com/SMAKSS/search/blob/master/.github/CONTRIBUTING.md) for guidelines and details.
 
-or
+## Code of Conduct
 
-[![View @smakss/search](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/smakss-search-zlqtu3?fontsize=14&hidenavigation=1&theme=dark)
+We value and prioritize the well-being of all our contributors and users. To ensure that this project remains a welcoming space for everyone, please refer to our [Code of Conduct](https://github.com/SMAKSS/search/blob/master/.github/CODE_OF_CONDUCT.md).
