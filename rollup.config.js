@@ -25,5 +25,71 @@ export default [
       ...Object.keys(packageJson.devDependencies || {}),
       ...Object.keys(packageJson.peerDependencies || {})
     ]
+  },
+  {
+    input: 'src/search-functions.ts',
+    output: [
+      {
+        file: 'dist/cjs/search-functions.js',
+        format: 'cjs',
+        exports: 'named',
+        sourcemap: true
+      },
+      {
+        file: 'dist/esm/search-functions.js',
+        format: 'esm',
+        exports: 'named',
+        sourcemap: true
+      }
+    ],
+    plugins: [resolve(), commonjs(), typescript()],
+    external: [
+      ...Object.keys(packageJson.devDependencies || {}),
+      ...Object.keys(packageJson.peerDependencies || {})
+    ]
+  },
+  {
+    input: 'src/search.ts',
+    output: [
+      {
+        file: 'dist/cjs/search.js',
+        format: 'cjs',
+        exports: 'named',
+        sourcemap: true
+      },
+      {
+        file: 'dist/esm/search.js',
+        format: 'esm',
+        exports: 'named',
+        sourcemap: true
+      }
+    ],
+    plugins: [resolve(), commonjs(), typescript()],
+    external: [
+      ...Object.keys(packageJson.devDependencies || {}),
+      ...Object.keys(packageJson.peerDependencies || {})
+    ]
+  },
+  {
+    input: 'src/utils.ts',
+    output: [
+      {
+        file: 'dist/cjs/utils.js',
+        format: 'cjs',
+        exports: 'named',
+        sourcemap: true
+      },
+      {
+        file: 'dist/esm/utils.js',
+        format: 'esm',
+        exports: 'named',
+        sourcemap: true
+      }
+    ],
+    plugins: [resolve(), commonjs(), typescript()],
+    external: [
+      ...Object.keys(packageJson.devDependencies || {}),
+      ...Object.keys(packageJson.peerDependencies || {})
+    ]
   }
 ];

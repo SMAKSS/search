@@ -1,72 +1,80 @@
 import { SearchItem } from './types';
-import { addIfUnique, matchesRegex, shouldIncludeKey } from './utils';
+import { addUniqueMatch, isKeyIncluded } from './utils';
 
 /**
- * Searches through the properties of an object and adds matches to a filtered list.
- * If a property value is an array, it will recursively search through the array as well.
+ * Searches for matches within an object based on a regex pattern.
+ * If a match is found within the specified keys, it adds the object to the results.
  *
- * @param {SearchItem<T>} obj - The object to search through.
- * @param {SearchItem<T>[]} filtered - The list to add matched items to.
- * @param {string[]} keys - The keys to search within.
+ * @param {SearchItem} object - The object to search within.
+ * @param {string[]} keys - The keys to include or exclude in the search.
  * @param {boolean} include - Whether to include or exclude the specified keys in the search.
- * @param {RegExp} regex - The regular expression to match against the property values.
- * @template T - The generic type parameter for the items being searched.
+ * @param {RegExp} regex - The regex pattern to match against the object values.
+ * @param {SearchItem[]} results - The array to store matching objects.
  *
  * @example
- * const obj = { name: 'John', age: 30 };
- * const filtered = [];
- * searchInObject(obj, filtered, ['name'], true, /John/);
- * // filtered now contains [{ name: 'John', age: 30 }]
+ * // Define an object to search
+ * const person = { name: "John", lastName: "Doe" };
+ * const results = [];
+ *
+ * // Search within the object for the name 'John'
+ * searchWithinObject(person, ['name'], true, /John/i, results);
+ *
+ * // results will contain the person object
+ * console.log(results); // [{ name: "John", lastName: "Doe" }]
  */
-export function searchInObject(
-  obj: SearchItem,
-  filtered: SearchItem[],
+export function searchWithinObject(
+  object: SearchItem,
   keys: string[],
   include: boolean,
-  regex: RegExp
+  regex: RegExp,
+  results: SearchItem[]
 ): void {
-  for (const [key, value] of Object.entries(obj)) {
-    if (shouldIncludeKey(key, keys, include)) {
-      if (typeof value === 'string' && matchesRegex(value, regex)) {
-        addIfUnique(filtered, obj);
-      } else if (Array.isArray(value)) {
-        searchInArray(value, filtered, keys, include, regex);
-      }
+  for (const key of Object.keys(object)) {
+    if (isKeyIncluded(key, keys, include) && regex.test(String(object[key]))) {
+      addUniqueMatch(results, object);
+      break;
     }
   }
 }
 
 /**
- * Searches through an array of items, adding matches to a filtered list.
- * If an item is an array itself, it will recursively search through that array as well.
+ * Recursively searches through items for matches based on a regex pattern.
+ * It handles both arrays and individual objects.
  *
- * @param {Array<SearchItem<T>>} arr - The array to search through.
- * @param {SearchItem<T>[]} filtered - The list to add matched items to.
- * @param {string[]} keys - The keys to search within if the items are objects.
+ * @param {SearchItem | SearchItem[]} items - The items to search through. Can be a single item or an array of items.
+ * @param {string[]} keys - The keys to include or exclude in the search.
  * @param {boolean} include - Whether to include or exclude the specified keys in the search.
- * @param {RegExp} regex - The regular expression to match against the item values.
- * @template T - The generic type parameter for the items being searched.
+ * @param {RegExp} regex - The regex pattern to match against item values.
+ * @param {SearchItem[]} results - The array to store matching items.
  *
  * @example
- * const items = [{ name: 'John' }, { name: 'Jane' }];
- * const filtered = [];
- * searchInArray(items, filtered, ['name'], true, /Jane/);
- * // filtered now contains [{ name: 'Jane' }]
+ * // Define a list of objects to search
+ * const people = [
+ *   { name: "John", lastName: "Doe" },
+ *   { name: "Jane", lastName: "Doe" },
+ * ];
+ * const searchResults = [];
+ *
+ * // Recursively search for the term 'doe' in the list of people
+ * recursiveSearch(people, ['lastName'], true, /doe/i, searchResults);
+ *
+ * // searchResults will contain both person objects
+ * console.log(searchResults); // [{ name: "John", lastName: "Doe" }, { name: "Jane", lastName: "Doe" }]
  */
-export function searchInArray(
-  arr: SearchItem[],
-  filtered: SearchItem[],
+export function recursiveSearch(
+  items: SearchItem | SearchItem[],
   keys: string[],
   include: boolean,
-  regex: RegExp
+  regex: RegExp,
+  results: SearchItem[]
 ): void {
-  for (const item of arr) {
-    if (typeof item === 'string' && matchesRegex(item, regex)) {
-      addIfUnique(filtered, item);
-    } else if (Array.isArray(item)) {
-      searchInArray(item, filtered, keys, include, regex);
-    } else if (typeof item === 'object' && item !== null) {
-      searchInObject(item, filtered, keys, include, regex);
+  if (Array.isArray(items)) {
+    for (const item of items) {
+      recursiveSearch(item, keys, include, regex, results);
     }
+  } else if (typeof items === 'object' && items !== null) {
+    searchWithinObject(items, keys, include, regex, results);
+  } else if (regex.test(String(items))) {
+    addUniqueMatch(results, [items]);
   }
 }

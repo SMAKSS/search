@@ -1,41 +1,19 @@
 import { SearchItem } from './types';
 
 /**
- * Checks if a given value matches a regular expression.
+ * Determines whether a given key is included in the search based on the include parameter and the keys provided.
  *
- * @param {unknown} value - The value to test against the regular expression.
- * @param {RegExp} regex - The regular expression to match.
- * @returns {boolean} True if the value is a string and matches the regex, false otherwise.
- *
- * @example
- * // returns true
- * matchesRegex('hello', /hello/);
+ * @param {string} key - The key to check.
+ * @param {string[]} keys - The list of keys to consider in the search.
+ * @param {boolean} include - Flag determining if the keys should be included or excluded from the search.
+ * @returns {boolean} - True if the key is included in the search, false otherwise.
  *
  * @example
- * // returns false
- * matchesRegex(123, /hello/);
+ * // Check if 'name' is included in a search considering only 'name' and 'age':
+ * console.log(isKeyIncluded('name', ['name', 'age'], true)); // Output: true
+ * console.log(isKeyIncluded('address', ['name', 'age'], true)); // Output: false
  */
-export function matchesRegex(value: unknown, regex: RegExp): boolean {
-  return typeof value === 'string' && regex.test(value);
-}
-
-/**
- * Determines whether a key should be included in the search based on the include parameter.
- *
- * @param {string[]} keys - An array of keys to include or exclude.
- * @param {string} key - The current key to check.
- * @param {boolean} include - Whether to include or exclude the keys array.
- * @returns {boolean} True if the key should be included, false otherwise.
- *
- * @example
- * // returns true
- * shouldIncludeKey(['name', 'age'], 'name', true);
- *
- * @example
- * // returns false
- * shouldIncludeKey(['name', 'age'], 'location', true);
- */
-export function shouldIncludeKey(
+export function isKeyIncluded(
   key: string,
   keys: string[],
   include: boolean
@@ -44,23 +22,20 @@ export function shouldIncludeKey(
 }
 
 /**
- * Adds an item to the filtered list if it is not already present.
+ * Adds a search item to the results if it's not already included.
  *
- * @param {SearchItem<T>[]} filtered - The array to which the item will be added if it is unique.
- * @param {SearchItem<T>} item - The item to add if it is not already present in the array.
- *
- * @example
- * // filtered contains [{name: 'John'}, {name: 'Jane'}]
- * const filtered = [{name: 'John'}];
- * addIfUnique(filtered, {name: 'Jane'});
+ * @param {SearchItem[]} results - The current list of search results.
+ * @param {SearchItem} item - The item to potentially add to the results.
  *
  * @example
- * // filtered remains unchanged [{name: 'John'}]
- * const filtered = [{name: 'John'}];
- * addIfUnique(filtered, {name: 'John'});
+ * // Example usage of addUniqueMatch
+ * const results: SearchItem[] = [];
+ * const itemToAdd: SearchItem = { name: 'John', age: 30 };
+ * addUniqueMatch(results, itemToAdd);
+ * console.log(results); // Output: [{ name: 'John', age: 30 }]
  */
-export function addIfUnique(filtered: SearchItem[], item: SearchItem): void {
-  if (!filtered.some((el) => Object.is(el, item))) {
-    filtered.push(item);
+export function addUniqueMatch(results: SearchItem[], item: SearchItem): void {
+  if (!results.includes(item)) {
+    results.push(item);
   }
 }
