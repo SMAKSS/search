@@ -1,12 +1,12 @@
 # Search
 
-![npm](https://img.shields.io/npm/v/@smakss/search) ![Snyk Vulnerabilities for npm package](https://img.shields.io/snyk/vulnerabilities/npm/@smakss/search) ![NPM](https://img.shields.io/npm/l/@smakss/search) ![npm](https://img.shields.io/npm/dt/@smakss/search) ![npm bundle size (scoped)](https://img.shields.io/bundlephobia/min/@smakss/search)
+![npm](https://img.shields.io/npm/v/@smakss/search) ![NPM](https://img.shields.io/npm/l/@smakss/search) ![npm](https://img.shields.io/npm/dt/@smakss/search) ![npm bundle size (scoped)](https://img.shields.io/bundlephobia/min/@smakss/search)
 
-Searching through arrays or objects might be easy these days with array helpers like [filter](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter) or libraries like [\_lodash](https://www.npmjs.com/package/lodash), but what if you want a lighter library and have a nested array of object and want to search into every key of your object with a specific keyword? This might be hard or frustrating sometimes, this package will help you to achieve search a keyword through each object key, array elements and/or nested arrays. Also, this package uses ES6+ syntax so if you using older standards for writing JS code you may need a transpiler for it.
+Searching through arrays, nested arrays, or objects for specific keywords can often be cumbersome, especially when dealing with deeply nested structures. This package simplifies that process by offering a lightweight, flexible search utility that delves into every key of an object or array elements to find matches. It utilizes ES6+ syntax, so if your codebase uses older standards, a transpiler might be required.
 
 ## Demo
 
-You can check the [working demo](https://runkit.com/smakss/5f738b7f464579001bfda2d0) in runkit.
+Check out the [working demo](https://runkit.com/smakss/5f738b7f464579001bfda2d0) on RunKit.
 
 or
 
@@ -14,134 +14,116 @@ or
 
 ## How it works?
 
-To install it you can simply do the following command:
+To install the package:
 
 ```bash
 npm i @smakss/search
-or
+# or
 yarn add @smakss/search
 ```
 
-to include it with common js module you should do this:
+For CommonJS modules:
 
 ```js
-var Search = require("@smakss/search");
+const Search = require('@smakss/search');
 ```
 
-and to include it with ECMAscript module you can simply do this one:
+For ECMAScript modules:
 
 ```js
-import Search from "@smakss/search";
+import Search from '@smakss/search';
 ```
 
-then to use it within your application you can do it just like below:
+Then, to utilize the search function within your application:
 
-The search function will accept 4 input parameter:
+The `Search` function accepts an options object with the following properties:
 
-- `searchText` (`String`): The string that you want to look for in your element (It will match the whole string without regards to case sensitivity).
-- `searchItems` (`Object|Array`): Element that you want to perform a search on it.
-- `keys` (`Array`): Keys to include or exclude in your object items. If you exclude them it will exclude them from search and search won't perform on those specific keys. And if you include them search will only perform on those desired keys and it will ignore others.
-- `include` (`Boolean`): A flag to determine whether the `keys` are included or excluded. It will be `True` by default, which means the keys will be included.
-- `exact` (`Boolean`): A flag to determine whether the you are exactly looking for `searchText` string or not. It will be `False` by default, which means it will not looking for exact `searchText`. e. g. Let's say `searchText` is `5` so it will match all numbers where they include `5` _(`5`, `15`, `25`, ...)_ otherwise it will only match `5` alone. This feature is only available in `v1.0.6+`.
+- `searchText` (`String`): The string to search for.
+- `searchItems` (`Array|Object`): The items or structure to search within.
+- `keys` (`Array`): An array of keys to include or exclude from the search.
+- `include` (`Boolean`): Determines whether to include (`true`) or exclude (`false`) the keys specified. Defaults to `true`.
+- `exact` (`Boolean`): Determines whether to perform an exact match search. Defaults to `false`.
 
-## Examples of usage
+## Examples of Usage
 
-### Passing an object
+### Searching Within an Object
 
-If the matching element was in object it will return the whole object:
+When the match is found in an object, the entire object is returned:
 
 ```js
-const obj = { name: "John", lastName: "Doe" };
+const obj = { name: 'John', lastName: 'Doe' };
 
-Search({ searchText: "john", searchItems: obj });
-
-// Result: [{ lastName: "Doe", name: "John" }]
+const results = Search({ searchText: 'john', searchItems: [obj] });
+// Results: [{ name: 'John', lastName: 'Doe' }]
 ```
 
-### Passing an array
+### Searching Within an Array
 
 ```js
 const arr = [
-  { name: "John", lastName: "Doe" },
-  { name: "Joe", lastName: "Doe" },
+  { name: 'John', lastName: 'Doe' },
+  { name: 'Joe', lastName: 'Doe' }
 ];
 
-Search({ searchText: "john", searchItems: arr });
-
-// Result: [{ lastName: "Doe", name: "John" }]
+const results = Search({ searchText: 'john', searchItems: arr });
+// Results: [{ name: 'John', lastName: 'Doe' }]
 ```
 
-### Passing a nested array
+### Searching Within a Nested Array
 
 ```js
-const arr = [
-  { name: "John", lastName: "Doe" },
-  { name: "Joe", lastName: "Doe" },
-  [{ name: "Jane", lastName: "Doe" }],
+const nestedArr = [
+  { name: 'John', lastName: 'Doe' },
+  { name: 'Joe', lastName: 'Doe' },
+  [{ name: 'Jane', lastName: 'Doe' }]
 ];
 
-Search({ searchText: "jane", searchItems: arr });
-
-// Result: [{ lastName: "Doe", name: "Jane" }]
+const results = Search({ searchText: 'jane', searchItems: nestedArr });
+// Results: [{ name: 'Jane', lastName: 'Doe' }]
 ```
 
-### Passing a nested array with including keys
+### Including Specific Keys
 
 ```js
-const arr = [
-  { name: "John", lastName: "Doe" },
-  { name: "Joe", lastName: "Doe" },
-  [{ name: "Jane", lastName: "Doe" }],
-];
-
-Search({ searchText: "jane", searchItems: arr, keys: ["name"] });
-
-// Result: [{ lastName: "Doe", name: "Jane" }]
-```
-
-### Passing a nested array with excluding keys
-
-```js
-const arr = [
-  { name: "John", lastName: "Doe" },
-  { name: "Joe", lastName: "Doe" },
-  [{ name: "Jane", lastName: "Doe" }],
-];
-
-Search({
-  searchText: "jane",
-  searchItems: arr,
-  keys: ["name"],
-  include: false,
+const results = Search({
+  searchText: 'jane',
+  searchItems: nestedArr,
+  keys: ['name']
 });
-
-// Result: []
+// Results: [{ name: 'Jane', lastName: 'Doe' }]
 ```
 
-<sub>The result will be an empty array because we exclude the `name` key from the search so nothing will be matched with the provided params.</sub>
-
-### Passing a nested array with exact search
-
-<sub>(Only available in `v1.0.6+`)</sub>
+### Excluding Specific Keys
 
 ```js
-const arr = [
-  { name: "John", lastName: "Doe" },
-  { name: "Janet", lastName: "Doe" },
-  [{ name: "Jane", lastName: "Doe" }],
-];
-
-Search({ searchText: "jane", searchItems: arr, exact: true });
-
-// Result: [{ name: "Jane", lastName: "Doe" }]
+const results = Search({
+  searchText: 'jane',
+  searchItems: nestedArr,
+  keys: ['lastName'],
+  include: false
+});
+// Results: []
 ```
 
-<sub>It will only match Jane and not Janet.</sub>
+_Note: The result is an empty array because 'lastName' is excluded from the search._
+
+### Performing an Exact Match Search
+
+```js
+const results = Search({
+  searchText: 'jane',
+  searchItems: nestedArr,
+  exact: true
+});
+// Results: [{ name: 'Jane', lastName: 'Doe' }]
+```
+
+_Note: Only the exact term 'Jane' is matched, not 'Janet' or other partial matches._
 
 ## Contributing
 
-Interested in making contributions to this project? Please see [CONTRIBUTING.md](https://github.com/SMAKSS/search/blob/master/.github/CONTRIBUTING.md) for guidelines and details.
+Interested in contributing to this project? Please refer to [CONTRIBUTING.md](./CONTRIBUTING.md) for contribution guidelines.
 
 ## Code of Conduct
 
-We value and prioritize the well-being of all our contributors and users. To ensure that this project remains a welcoming space for everyone, please refer to our [Code of Conduct](https://github.com/SMAKSS/search/blob/master/.github/CODE_OF_CONDUCT.md).
+Our community prioritizes the well-being and inclusivity of all contributors and users. Please review our [Code of Conduct](./CODE_OF_CONDUCT.md) to help maintain a supportive environment for everyone.

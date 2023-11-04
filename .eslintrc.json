@@ -1,0 +1,36 @@
+{
+  "env": {
+    "browser": true,
+    "es6": true
+  },
+  "extends": ["eslint:recommended", "plugin:@typescript-eslint/recommended"],
+  // Specifying Parser
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": "latest",
+    "sourceType": "module",
+    "tsconfigRootDir": ".",
+    "project": ["./tsconfig.json"]
+  },
+  // Configuring third-party plugins
+  "plugins": ["@typescript-eslint"],
+  // Resolve imports
+  "rules": {
+    "linebreak-style": "off",
+    // Disallow the `any` type.
+    "@typescript-eslint/no-explicit-any": "warn",
+    "@typescript-eslint/ban-types": [
+      "error",
+      {
+        "extendDefaults": true,
+        "types": {
+          "{}": false
+        }
+      }
+    ],
+    "react-hooks/exhaustive-deps": "off",
+    // Enforce the use of the shorthand syntax.
+    "object-shorthand": "error",
+    "no-console": "warn"
+  }
+}

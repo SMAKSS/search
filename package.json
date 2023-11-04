@@ -4,32 +4,51 @@
     "url": "https://github.com/SMAKSS/search/issues"
   },
   "description": "Search through array and/or objects for specific keyword.",
-  "exports": {
-    "import": "./index.mjs",
-    "require": "./index.cjs"
+  "devDependencies": {
+    "@commitlint/cli": "^18.2.0",
+    "@commitlint/config-conventional": "^18.1.0",
+    "@rollup/plugin-commonjs": "^25.0.7",
+    "@rollup/plugin-node-resolve": "^15.2.3",
+    "@rollup/plugin-typescript": "^11.1.5",
+    "@typescript-eslint/eslint-plugin": "^6.9.1",
+    "@typescript-eslint/parser": "^6.9.1",
+    "eslint": "^8.53.0",
+    "husky": "^8.0.3",
+    "lint-staged": "^15.0.2",
+    "prettier": "^3.0.3",
+    "rollup": "^4.3.0",
+    "tslib": "^2.6.2",
+    "typescript": "^5.2.2"
   },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "exports": {
+    "import": "./dist/esm/index.js",
+    "require": "./dist/cjs/index.js"
+  },
+  "files": ["dist"],
   "homepage": "https://github.com/SMAKSS/search#readme",
-  "keywords": [
-    "npm",
-    "yarn",
-    "search",
-    "Array",
-    "Object",
-    "SMAKSS",
-    "CommonJS",
-    "EcmaScript",
-    "Nested array",
-    "Nested object",
-    "Search in arrays",
-    "Search in objects"
-  ],
+  "keywords": ["npm", "yarn", "search", "Array", "Object", "SMAKSS", "CommonJS", "EcmaScript", "Typescript", "Nested array", "Nested object", "Search in arrays", "Search in objects"],
   "license": "MIT",
-  "main": "./index.cjs",
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
   "name": "@smakss/search",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/SMAKSS/search.git"
   },
+  "scripts": {
+    "format": "prettier --write \"**/*.+(js|json|yml|yaml|ts|md)\"",
+    "format:check": "prettier -l \"**/*.+(js|json|yml|yaml|ts|md)\"",
+    "generate": "rollup -c",
+    "generate:check": "yarn format && yarn lint && yarn typecheck",
+    "lint": "eslint --cache --cache-location ./node_modules/.cache/.eslintcache --ext js,ts --max-warnings=0 .",
+    "lint:fix": "eslint src/**/*.ts --fix",
+    "setup": "yarn && husky install",
+    "typecheck": "tsc -b ."
+  },
   "type": "module",
-  "version": "1.2.4"
+  "types": "lib",
+  "version": "2.0.0-beta.0"
 }
