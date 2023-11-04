@@ -5,9 +5,9 @@ import { matchesRegex, addIfUnique } from './utils';
 /**
  * The SearchOptions interface represents the structure for search configuration.
  */
-interface SearchOptions<T> {
+interface SearchOptions {
   searchText: string;
-  searchItems: Array<SearchItem<T>>;
+  searchItems: SearchItem[];
   keys: string[];
   include: boolean;
   exact: boolean;
@@ -37,21 +37,24 @@ interface SearchOptions<T> {
  * });
  * // results will be [{ name: 'Jane Doe' }]
  */
-function search<T>({
+
+function search({
   searchText = '',
   searchItems = [],
   keys = [],
   include = true,
   exact = false
-}: Partial<SearchOptions<T>>): Array<SearchItem<T>> {
+}: Partial<SearchOptions>): SearchItem[] {
   const regex = exact
     ? new RegExp(`^${searchText}$`, 'i')
     : new RegExp(searchText, 'i');
-  const filtered: Array<SearchItem<T>> = [];
+  const filtered: SearchItem[] = [];
 
   searchItems.forEach((item) => {
-    if (matchesRegex(item, regex)) {
-      addIfUnique(filtered, item);
+    if (typeof item === 'string') {
+      if (matchesRegex(item, regex)) {
+        addIfUnique(filtered, item);
+      }
     } else if (Array.isArray(item)) {
       searchInArray(item, filtered, keys, include, regex);
     } else if (typeof item === 'object' && item !== null) {

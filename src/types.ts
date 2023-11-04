@@ -1,3 +1,1 @@
-export type SearchItem<T> = T & {
-  [key: string]: string | SearchItem<T> | Array<SearchItem<T>>;
-};
+export type SearchItem = Record<string, unknown>;

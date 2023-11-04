@@ -36,8 +36,8 @@ export function matchesRegex(value: unknown, regex: RegExp): boolean {
  * shouldIncludeKey(['name', 'age'], 'location', true);
  */
 export function shouldIncludeKey(
-  keys: string[],
   key: string,
+  keys: string[],
   include: boolean
 ): boolean {
   return include ? keys.includes(key) : !keys.includes(key);
@@ -59,10 +59,7 @@ export function shouldIncludeKey(
  * const filtered = [{name: 'John'}];
  * addIfUnique(filtered, {name: 'John'});
  */
-export function addIfUnique<T>(
-  filtered: SearchItem<T>[],
-  item: SearchItem<T>
-): void {
+export function addIfUnique(filtered: SearchItem[], item: SearchItem): void {
   if (!filtered.some((el) => Object.is(el, item))) {
     filtered.push(item);
   }
