@@ -3,7 +3,7 @@
   "bugs": {
     "url": "https://github.com/SMAKSS/search/issues"
   },
-  "description": "Search through array and/or objects for specific keyword.",
+  "description": "Enhance your searching capabilities with @smakss/search. Effortlessly find keywords in arrays, nested arrays, and objects, perfect for deep search needs in various data structures.",
   "devDependencies": {
     "@commitlint/cli": "^18.2.0",
     "@commitlint/config-conventional": "^18.1.0",
@@ -27,9 +27,30 @@
     "import": "./dist/esm/index.js",
     "require": "./dist/cjs/index.js"
   },
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "homepage": "https://github.com/SMAKSS/search#readme",
-  "keywords": ["npm", "yarn", "search", "Array", "Object", "SMAKSS", "CommonJS", "EcmaScript", "Typescript", "Nested array", "Nested object", "Search in arrays", "Search in objects"],
+  "keywords": [
+    "advanced-search",
+    "deep-search-arrays",
+    "object-search",
+    "nested-data-search",
+    "keyword-finder",
+    "npm",
+    "yarn",
+    "search",
+    "Array",
+    "Object",
+    "SMAKSS",
+    "CommonJS",
+    "EcmaScript",
+    "Typescript",
+    "Nested array",
+    "Nested object",
+    "Search in arrays",
+    "Search in objects"
+  ],
   "license": "MIT",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
@@ -50,5 +71,5 @@
   },
   "type": "module",
   "types": "lib",
-  "version": "2.0.0-beta.3"
+  "version": "2.0.0"
 }

@@ -6,9 +6,7 @@ Searching through arrays, nested arrays, or objects for specific keywords can of
 
 ## Demo
 
-Check out the [working demo](https://runkit.com/smakss/5f738b7f464579001bfda2d0) on RunKit.
-
-or
+Explore the live demonstration available on CodeSandbox:
 
 [![View @smakss/search](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/smakss-search-zlqtu3?fontsize=14&hidenavigation=1&theme=dark)
 
