@@ -31,12 +31,12 @@ import { recursiveSearch } from './search-functions';
  * console.log(found); // [{ name: "John", lastName: "Doe" }]
  */
 function search({
-  searchText = '',
-  searchItems = [],
+  searchText,
+  searchItems,
   keys = [],
   include = true,
   exact = false
-}: Partial<SearchOptions>): SearchItem[] {
+}: SearchOptions): SearchItem[] {
   const regex = new RegExp(exact ? `^${searchText}$` : searchText, 'i');
   const results: SearchItem[] = [];
 
