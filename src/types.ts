@@ -23,9 +23,9 @@ export type SearchItem = Record<string, any>;
  *   exact: false
  * };
  */
-export interface SearchOptions {
+export interface SearchOptions<T extends SearchItem> {
   searchText: string;
-  searchItems: SearchItem | SearchItem[];
+  searchItems: T | T[];
   keys: string[];
   include: boolean;
   exact: boolean;

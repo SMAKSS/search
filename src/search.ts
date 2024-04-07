@@ -6,7 +6,8 @@ import { recursiveSearch } from './search-functions';
  *
  * @param {Partial<SearchOptions>} options - The search parameters including searchText, searchItems, keys to search in,
  *                                           whether to include keys and if the search is exact.
- * @returns {SearchItem[]} The matched items as an array.
+ * @template T - The type of the items to search through, extending SearchItem.
+ * @returns {T[]} The matched items as an array.
  *
  * @example
  * // Define a list of objects to search
@@ -30,17 +31,17 @@ import { recursiveSearch } from './search-functions';
  * // found will contain the object with lastName 'Doe'
  * console.log(found); // [{ name: "John", lastName: "Doe" }]
  */
-function search({
+function search<T extends SearchItem = SearchItem>({
   searchText = '',
   searchItems = [],
   keys = [],
   include = true,
   exact = false
-}: Partial<SearchOptions>): SearchItem[] {
+}: Partial<SearchOptions<T>>): T[] {
   const regex = new RegExp(exact ? `^${searchText}$` : searchText, 'i');
-  const results: SearchItem[] = [];
+  const results: T[] = [];
 
-  const preparedItems: SearchItem[] = Array.isArray(searchItems)
+  const preparedItems: T[] = Array.isArray(searchItems)
     ? searchItems
     : [searchItems];
   const preparedKeys: string[] =
