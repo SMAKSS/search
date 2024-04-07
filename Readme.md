@@ -42,48 +42,56 @@ The `Search` function accepts an options object with the following properties:
 - `include` (`Boolean`): Determines whether to include (`true`) or exclude (`false`) the keys specified. Defaults to `true`.
 - `exact` (`Boolean`): Determines whether to perform an exact match search. Defaults to `false`.
 
+The search function can take a generic type to specify the type of the search items.
+
 ## Examples of Usage
+
+Lets suppose we have the following type:
+
+```ts
+type Person = { name: string; lastName: string; }
+```
 
 ### Searching Within an Object
 
 When the match is found in an object, the entire object is returned:
 
-```js
-const obj = { name: 'John', lastName: 'Doe' };
+```ts
+const obj: Person = { name: 'John', lastName: 'Doe' };
 
-const results = Search({ searchText: 'john', searchItems: [obj] });
+const results = Search<Person>({ searchText: 'john', searchItems: [obj] });
 // Results: [{ name: 'John', lastName: 'Doe' }]
 ```
 
 ### Searching Within an Array
 
-```js
-const arr = [
+```ts
+const arr: Person[] = [
   { name: 'John', lastName: 'Doe' },
   { name: 'Joe', lastName: 'Doe' }
 ];
 
-const results = Search({ searchText: 'john', searchItems: arr });
+const results = Search<Person>({ searchText: 'john', searchItems: arr });
 // Results: [{ name: 'John', lastName: 'Doe' }]
 ```
 
 ### Searching Within a Nested Array
 
-```js
-const nestedArr = [
+```ts
+const nestedArr: (Person | Person[])[] = [
   { name: 'John', lastName: 'Doe' },
   { name: 'Joe', lastName: 'Doe' },
   [{ name: 'Jane', lastName: 'Doe' }]
 ];
 
-const results = Search({ searchText: 'jane', searchItems: nestedArr });
+const results = Search<Person | Person[]>({ searchText: 'jane', searchItems: nestedArr });
 // Results: [{ name: 'Jane', lastName: 'Doe' }]
 ```
 
 ### Including Specific Keys
 
-```js
-const results = Search({
+```ts
+const results = Search<Person>({
   searchText: 'jane',
   searchItems: nestedArr,
   keys: ['name']
@@ -93,8 +101,8 @@ const results = Search({
 
 ### Excluding Specific Keys
 
-```js
-const results = Search({
+```ts
+const results = Search<Person>({
   searchText: 'jane',
   searchItems: nestedArr,
   keys: ['lastName'],
@@ -107,8 +115,8 @@ _Note: The result is an empty array because 'lastName' is excluded from the sear
 
 ### Performing an Exact Match Search
 
-```js
-const results = Search({
+```ts
+const results = Search<Person>({
   searchText: 'jane',
   searchItems: nestedArr,
   exact: true

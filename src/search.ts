@@ -10,8 +10,9 @@ import { recursiveSearch } from './search-functions';
  * @returns {T[]} The matched items as an array.
  *
  * @example
+ * type Person = { name: string; lastName: string; }
  * // Define a list of objects to search
- * const people = [
+ * const people: Person[] = [
  *   { name: "John", lastName: "Doe" },
  *   { name: "Jane", lastName: "Smith" },
  * ];
@@ -26,7 +27,7 @@ import { recursiveSearch } from './search-functions';
  * };
  *
  * // Perform the search
- * const found = search(options);
+ * const found = search<Person>(options);
  *
  * // found will contain the object with lastName 'Doe'
  * console.log(found); // [{ name: "John", lastName: "Doe" }]
