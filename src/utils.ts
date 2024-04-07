@@ -1,4 +1,4 @@
-import { SearchItem } from './types';
+import type { SearchItem, KeyOf } from './types';
 
 /**
  * Determines whether a given key is included in the search based on the include parameter and the keys provided.
@@ -13,9 +13,9 @@ import { SearchItem } from './types';
  * console.log(isKeyIncluded('name', ['name', 'age'], true)); // Output: true
  * console.log(isKeyIncluded('address', ['name', 'age'], true)); // Output: false
  */
-export function isKeyIncluded(
-  key: string,
-  keys: string[],
+export function isKeyIncluded<T extends SearchItem>(
+  key: KeyOf<T>,
+  keys: KeyOf<T>[],
   include: boolean
 ): boolean {
   return include ? keys.includes(key) : !keys.includes(key);

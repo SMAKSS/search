@@ -1,4 +1,4 @@
-import { SearchItem } from './types';
+import type { SearchItem, KeyOf } from './types';
 import { addUniqueMatch, isKeyIncluded } from './utils';
 
 /**
@@ -25,7 +25,7 @@ import { addUniqueMatch, isKeyIncluded } from './utils';
  */
 export function searchWithinObject<T extends SearchItem>(
   object: T,
-  keys: string[],
+  keys: KeyOf<T>[],
   include: boolean,
   regex: RegExp,
   results: T[]
@@ -65,7 +65,7 @@ export function searchWithinObject<T extends SearchItem>(
  */
 export function recursiveSearch<T extends SearchItem>(
   items: T | T[],
-  keys: string[],
+  keys: KeyOf<T>[],
   include: boolean,
   regex: RegExp,
   results: T[]

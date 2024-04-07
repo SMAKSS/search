@@ -1,4 +1,4 @@
-import { SearchItem, SearchOptions } from './types';
+import type { SearchItem, SearchOptions, KeyOf } from './types';
 import { recursiveSearch } from './search-functions';
 
 /**
@@ -45,7 +45,7 @@ function search<T extends SearchItem = SearchItem>({
   const preparedItems: T[] = Array.isArray(searchItems)
     ? searchItems
     : [searchItems];
-  const preparedKeys: string[] =
+  const preparedKeys: KeyOf<T>[] =
     keys.length > 0 ? keys : Object.keys(preparedItems[0] || {});
 
   recursiveSearch(preparedItems, preparedKeys, include, regex, results);
