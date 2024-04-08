@@ -29,7 +29,10 @@ describe('recursiveSearch', () => {
   });
 
   it('should work recursively through nested arrays/objects', () => {
-    const nestedPeople: SearchItem[] = [
+    const nestedPeople: (
+      | SearchItem
+      | (SearchItem & { contacts: SearchItem[] })
+    )[] = [
       {
         name: 'John',
         lastName: 'Doe',
