@@ -4,7 +4,7 @@ import { recursiveSearch } from './search-functions';
 /**
  * Searches for items within a collection that match the given search text.
  *
- * @param {Partial<SearchOptions>} options - The search parameters including searchText, searchItems, keys to search in,
+ * @param {SearchOptions} options - The search parameters including searchText, searchItems, keys to search in,
  *                                           whether to include keys and if the search is exact.
  * @returns {SearchItem[]} The matched items as an array.
  *
