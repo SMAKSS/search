@@ -1,8 +1,10 @@
-import { SearchItem } from './types';
+import { KeyOf } from './types';
 import { isKeyIncluded, addUniqueMatch } from './utils';
 
+type Person = { name: string; age: number };
+
 describe('isKeyIncluded', () => {
-  const keys = ['name', 'age'];
+  const keys: KeyOf<Person>[] = ['name', 'age'];
 
   it('should return true when key is in the list and include is true', () => {
     expect(isKeyIncluded('name', keys, true)).toBeTruthy();
@@ -23,15 +25,15 @@ describe('isKeyIncluded', () => {
 
 describe('addUniqueMatch', () => {
   it('should add item to results if not already included', () => {
-    const results: SearchItem[] = [];
-    const item = { name: 'John', age: 30 };
+    const results: Person[] = [];
+    const item: Person = { name: 'John', age: 30 };
     addUniqueMatch(results, item);
     expect(results).toContain(item);
   });
 
   it('should not add item to results if already included', () => {
-    const item = { name: 'Jane', age: 25 };
-    const results = [item];
+    const item: Person = { name: 'Jane', age: 25 };
+    const results: Person[] = [item];
     addUniqueMatch(results, item);
     expect(results).toEqual([item]);
   });
