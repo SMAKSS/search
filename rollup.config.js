@@ -20,7 +20,13 @@ export default [
         sourcemap: true
       }
     ],
-    plugins: [resolve(), commonjs(), typescript()],
+    plugins: [
+      resolve(),
+      commonjs(),
+      typescript({
+        exclude: ['**/*.test.ts', '**/*.spec.ts', '**/__tests__/**']
+      })
+    ],
     external: [
       ...Object.keys(packageJson.devDependencies || {}),
       ...Object.keys(packageJson.peerDependencies || {})

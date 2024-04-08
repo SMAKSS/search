@@ -4,7 +4,6 @@
     "es6": true
   },
   "extends": ["eslint:recommended", "plugin:@typescript-eslint/recommended"],
-  // Specifying Parser
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaVersion": "latest",
@@ -12,12 +11,9 @@
     "tsconfigRootDir": ".",
     "project": ["./tsconfig.json"]
   },
-  // Configuring third-party plugins
   "plugins": ["@typescript-eslint"],
-  // Resolve imports
   "rules": {
     "linebreak-style": "off",
-    // Disallow the `any` type.
     "@typescript-eslint/no-explicit-any": "warn",
     "@typescript-eslint/ban-types": [
       "error",
@@ -29,7 +25,6 @@
       }
     ],
     "react-hooks/exhaustive-deps": "off",
-    // Enforce the use of the shorthand syntax.
     "object-shorthand": "error",
     "no-console": "warn"
   }
