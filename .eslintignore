@@ -9,3 +9,6 @@ lint-staged.config.cjs
 
 # commitlint config
 commitlint.config.cjs
+
+# jest config
+jest.config.cjs
