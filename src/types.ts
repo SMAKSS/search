@@ -23,10 +23,16 @@ export type SearchItem = Record<string, any>;
  *   exact: false
  * };
  */
-export interface SearchOptions {
+export interface SearchOptions<T extends SearchItem> {
   searchText: string;
-  searchItems: SearchItem | SearchItem[];
-  keys?: string[];
+  searchItems: T | T[];
+  keys?: KeyOf<T>[];
   include?: boolean;
   exact?: boolean;
 }
+
+/**
+ * Represents a key of a given object type.
+ * @alias keyof
+ */
+export type KeyOf<T> = keyof T;

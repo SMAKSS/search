@@ -1,4 +1,4 @@
-import { SearchItem, SearchOptions } from './types';
+import type { SearchItem, SearchOptions, KeyOf } from './types';
 import { recursiveSearch } from './search-functions';
 
 /**
@@ -6,11 +6,13 @@ import { recursiveSearch } from './search-functions';
  *
  * @param {SearchOptions} options - The search parameters including searchText, searchItems, keys to search in,
  *                                           whether to include keys and if the search is exact.
- * @returns {SearchItem[]} The matched items as an array.
+ * @template T - The type of the items to search through, extending SearchItem.
+ * @returns {T[]} The matched items as an array.
  *
  * @example
+ * type Person = { name: string; lastName: string; }
  * // Define a list of objects to search
- * const people = [
+ * const people: Person[] = [
  *   { name: "John", lastName: "Doe" },
  *   { name: "Jane", lastName: "Smith" },
  * ];
@@ -25,25 +27,25 @@ import { recursiveSearch } from './search-functions';
  * };
  *
  * // Perform the search
- * const found = search(options);
+ * const found = search<Person>(options);
  *
  * // found will contain the object with lastName 'Doe'
  * console.log(found); // [{ name: "John", lastName: "Doe" }]
  */
-function search({
+function search<T extends SearchItem = SearchItem>({
   searchText,
   searchItems,
   keys = [],
   include = true,
   exact = false
-}: SearchOptions): SearchItem[] {
+}: SearchOptions<T>): T[] {
   const regex = new RegExp(exact ? `^${searchText}$` : searchText, 'i');
-  const results: SearchItem[] = [];
+  const results: T[] = [];
 
-  const preparedItems: SearchItem[] = Array.isArray(searchItems)
+  const preparedItems: T[] = Array.isArray(searchItems)
     ? searchItems
     : [searchItems];
-  const preparedKeys: string[] =
+  const preparedKeys: KeyOf<T>[] =
     keys.length > 0 ? keys : Object.keys(preparedItems[0] || {});
 
   recursiveSearch(preparedItems, preparedKeys, include, regex, results);

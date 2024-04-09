@@ -1,4 +1,4 @@
-import { SearchItem } from './types';
+import type { SearchItem, KeyOf } from './types';
 
 /**
  * Determines whether a given key is included in the search based on the include parameter and the keys provided.
@@ -13,9 +13,9 @@ import { SearchItem } from './types';
  * console.log(isKeyIncluded('name', ['name', 'age'], true)); // Output: true
  * console.log(isKeyIncluded('address', ['name', 'age'], true)); // Output: false
  */
-export function isKeyIncluded(
-  key: string,
-  keys: string[],
+export function isKeyIncluded<T extends SearchItem>(
+  key: KeyOf<T>,
+  keys: KeyOf<T>[],
   include: boolean
 ): boolean {
   return include ? keys.includes(key) : !keys.includes(key);
@@ -24,8 +24,9 @@ export function isKeyIncluded(
 /**
  * Adds a search item to the results if it's not already included.
  *
- * @param {SearchItem[]} results - The current list of search results.
- * @param {SearchItem} item - The item to potentially add to the results.
+ * @template T - The type of the object to search within, extending SearchItem.
+ * @param {T[]} results - The current list of search results.
+ * @param {T} item - The item to potentially add to the results.
  *
  * @example
  * // Example usage of addUniqueMatch
@@ -34,7 +35,10 @@ export function isKeyIncluded(
  * addUniqueMatch(results, itemToAdd);
  * console.log(results); // Output: [{ name: 'John', age: 30 }]
  */
-export function addUniqueMatch(results: SearchItem[], item: SearchItem): void {
+export function addUniqueMatch<T extends SearchItem>(
+  results: T[],
+  item: T
+): void {
   if (!results.includes(item)) {
     results.push(item);
   }
