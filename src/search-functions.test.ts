@@ -1,6 +1,6 @@
 import { searchWithinObject, recursiveSearch } from './search-functions'; // Adjust import path
 
-type Person = { name: string; lastName: string; };
+type Person = { name: string; lastName: string };
 
 describe('searchWithinObject', () => {
   it('should add object to results if a match is found', () => {
@@ -30,10 +30,7 @@ describe('recursiveSearch', () => {
   });
 
   it('should work recursively through nested arrays/objects', () => {
-    const nestedPeople: (
-      | Person
-      | (Person & { contacts: Person[] })
-    )[] = [
+    const nestedPeople: (Person | (Person & { contacts: Person[] }))[] = [
       {
         name: 'John',
         lastName: 'Doe',

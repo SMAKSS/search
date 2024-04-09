@@ -49,7 +49,7 @@ The search function can take a generic type to specify the type of the search it
 Lets suppose we have the following type:
 
 ```ts
-type Person = { name: string; lastName: string; }
+type Person = { name: string; lastName: string };
 ```
 
 ### Searching Within an Object
@@ -84,7 +84,10 @@ const nestedArr: (Person | Person[])[] = [
   [{ name: 'Jane', lastName: 'Doe' }]
 ];
 
-const results = Search<Person | Person[]>({ searchText: 'jane', searchItems: nestedArr });
+const results = Search<Person | Person[]>({
+  searchText: 'jane',
+  searchItems: nestedArr
+});
 // Results: [{ name: 'Jane', lastName: 'Doe' }]
 ```
 
