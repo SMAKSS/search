@@ -11,7 +11,7 @@ describe('search', () => {
   ];
 
   it('should find items by lastName', () => {
-    const options: Partial<SearchOptions<Person>> = {
+    const options: SearchOptions<Person> = {
       searchText: 'doe',
       searchItems: people,
       keys: ['lastName'],
@@ -25,7 +25,7 @@ describe('search', () => {
   });
 
   it('should handle exact matches', () => {
-    const options: Partial<SearchOptions<Person>> = {
+    const options: SearchOptions<Person> = {
       searchText: 'Doe',
       searchItems: people,
       keys: ['lastName'],
@@ -39,7 +39,7 @@ describe('search', () => {
   });
 
   it('should be case insensitive', () => {
-    const options: Partial<SearchOptions<Person>> = {
+    const options: SearchOptions<Person> = {
       searchText: 'smith',
       searchItems: people,
       keys: ['lastName'],
@@ -51,7 +51,7 @@ describe('search', () => {
   });
 
   it('should return an empty array when no matches are found', () => {
-    const options: Partial<SearchOptions<Person>> = {
+    const options: SearchOptions<Person> = {
       searchText: 'nonexistent',
       searchItems: people,
       keys: ['lastName'],
@@ -73,7 +73,7 @@ describe('search', () => {
   });
 
   it('should include keys in the results if include is true', () => {
-    const options: Partial<SearchOptions<Person>> = {
+    const options: SearchOptions<Person> = {
       searchText: 'John',
       searchItems: people,
       keys: ['name'],
@@ -86,7 +86,7 @@ describe('search', () => {
   });
 
   it('should not include keys in the results if include is false', () => {
-    const options: Partial<SearchOptions<Person>> = {
+    const options: SearchOptions<Person> = {
       searchText: 'Jane',
       searchItems: people,
       keys: ['name'],
