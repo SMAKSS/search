@@ -8,3 +8,4 @@ public
 .github
 tmp
 *.yml
+pnpm-lock.yaml

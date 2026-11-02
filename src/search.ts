@@ -1,5 +1,5 @@
-import type { SearchItem, SearchOptions, KeyOf } from './types';
-import { recursiveSearch } from './search-functions';
+import type { SearchItem, SearchOptions, KeyOf } from './types.js';
+import { recursiveSearch } from './search-functions.js';
 
 /**
  * Searches for items within a collection that match the given search text.

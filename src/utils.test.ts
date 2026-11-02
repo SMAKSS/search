@@ -1,3 +1,4 @@
+import { describe, expect, it } from 'vitest';
 import { KeyOf } from './types';
 import { isKeyIncluded, addUniqueMatch } from './utils';
 

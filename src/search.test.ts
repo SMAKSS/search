@@ -1,3 +1,4 @@
+import { describe, expect, it } from 'vitest';
 import { SearchOptions } from './types';
 import search from './search';
 

@@ -1,0 +1,10 @@
+minimumReleaseAge: 1440
+blockExoticSubdeps: true
+strictDepBuilds: true
+overrides:
+  micromatch@<4.0.8: ^4.0.8
+  minimatch@<11.0.1: ^11.0.1
+  yaml@>=2.0.0 <2.8.3: ^2.8.3
+auditConfig:
+  ignoreGhsas:
+    - GHSA-gcqx-w48m-w2h4

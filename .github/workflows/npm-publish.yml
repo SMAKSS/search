@@ -1,4 +1,4 @@
-name: "@smakss/react-scroll-direction"
+name: Publish @smakss/search
 
 on:
   release:
@@ -11,14 +11,18 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
-          node-version: 18
-      - run: yarn
-      - run: yarn generate
+          node-version: "26"
+      - uses: pnpm/setup@fbda4c85fc2e1e08721cd8763afea8f48d60f024 # v3.0.0
+        with:
+          version: 12.17.0
+          cache: true
+          require-lockfile: true
+      - run: pnpm run generate
       - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: built-package
           path: |
-            ./path-to-your-build-folder
+            ./dist/
             package.json
 
   publish-npm:
@@ -31,18 +35,22 @@ jobs:
           name: built-package
       - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
-          node-version: 18
+          node-version: "26"
           registry-url: https://registry.npmjs.org/
           scope: "@smakss"
-      - run: yarn install
-      - run: yarn generate
+      - uses: pnpm/setup@fbda4c85fc2e1e08721cd8763afea8f48d60f024 # v3.0.0
+        with:
+          version: 12.17.0
+          cache: true
+          require-lockfile: true
+      - run: pnpm run generate
       - run: |
           if grep -q "beta" package.json; then
             echo "Publishing Beta to npm"
-            npm publish --tag beta
+            pnpm publish --tag beta
           else
             echo "Publishing Release to npm"
-            npm publish
+            pnpm publish
           fi
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
@@ -57,18 +65,22 @@ jobs:
           name: built-package
       - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
-          node-version: 18
+          node-version: "26"
           registry-url: https://npm.pkg.github.com/
           scope: "@smakss"
-      - run: yarn install
-      - run: yarn generate
+      - uses: pnpm/setup@fbda4c85fc2e1e08721cd8763afea8f48d60f024 # v3.0.0
+        with:
+          version: 12.17.0
+          cache: true
+          require-lockfile: true
+      - run: pnpm run generate
       - run: |
           if grep -q "beta" package.json; then
             echo "Publishing Beta to GitHub Package Registry"
-            npm publish --tag beta
+            pnpm publish --tag beta
           else
             echo "Publishing Release to GitHub Package Registry"
-            npm publish
+            pnpm publish
           fi
         env:
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
