@@ -61,6 +61,20 @@ describe('search', () => {
     expect(results.length).toBe(0);
   });
 
+  it('should treat regex metacharacters in search text literally', () => {
+    const items = [
+      { value: 'literal (.*) match' },
+      { value: 'literal any text' }
+    ];
+    const results = search({
+      searchText: '(.*)',
+      searchItems: items,
+      keys: ['value']
+    });
+
+    expect(results).toEqual([items[0]]);
+  });
+
   it('should search all keys if none are specified', () => {
     const options = {
       searchText: '25',

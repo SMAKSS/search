@@ -42,6 +42,8 @@ The `Search` function accepts an options object with the following properties:
 - `include` (`Boolean`): Determines whether to include (`true`) or exclude (`false`) the keys specified. Defaults to `true`.
 - `exact` (`Boolean`): Determines whether to perform an exact match search. Defaults to `false`.
 
+`searchText` is treated as a literal string, including regular expression characters. This keeps user-provided search text from controlling a regular expression.
+
 The search function can take a generic type to specify the type of the search items.
 
 ## Examples of Usage

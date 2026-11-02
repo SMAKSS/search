@@ -39,7 +39,11 @@ function search<T extends SearchItem = SearchItem>({
   include = true,
   exact = false
 }: SearchOptions<T>): T[] {
-  const regex = new RegExp(exact ? `^${searchText}$` : searchText, 'i');
+  const escapedSearchText = searchText.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const regex = new RegExp(
+    exact ? `^${escapedSearchText}$` : escapedSearchText,
+    'i'
+  );
   const results: T[] = [];
 
   const preparedItems: T[] = Array.isArray(searchItems)
