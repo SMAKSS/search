@@ -150,6 +150,6 @@ pnpm run dev:playground
 
 To build the playground app, run this from the package root:
 
-~~~sh
+```sh
 pnpm run build:playground
-~~~
+```
