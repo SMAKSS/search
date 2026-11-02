@@ -1,5 +1,6 @@
 # Build files
 dist
+playground
 
 #prettier config
 prettier.config.cjs

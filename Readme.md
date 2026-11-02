@@ -12,18 +12,18 @@ Explore the live demonstration available on CodeSandbox:
 
 ## How it works?
 
-To install the package:
+Install the package using npm or pnpm:
 
 ```bash
-npm i @smakss/search
+npm install @smakss/search
 # or
-yarn add @smakss/search
+pnpm add @smakss/search
 ```
 
 For CommonJS modules:
 
 ```js
-const Search = require('@smakss/search');
+const { default: Search } = require('@smakss/search');
 ```
 
 For ECMAScript modules:
@@ -138,3 +138,18 @@ Interested in contributing to this project? Please refer to [CONTRIBUTING.md](./
 ## Code of Conduct
 
 Our community prioritizes the well-being and inclusivity of all contributors and users. Please review our [Code of Conduct](./CODE_OF_CONDUCT.md) to help maintain a supportive environment for everyone.
+
+## Local playground
+
+This repository includes a Vite playground linked to the package through the pnpm workspace. Try the current local build without publishing a package version:
+
+```sh
+pnpm install
+pnpm run dev:playground
+```
+
+To build the playground app, run this from the package root:
+
+~~~sh
+pnpm run build:playground
+~~~
