@@ -14,7 +14,8 @@ body {
   min-width: 320px;
   min-height: 100vh;
   margin: 0;
-  background: radial-gradient(
+  background:
+    radial-gradient(
       ellipse at 12% 8%,
       rgba(58, 96, 175, 0.28),
       transparent 38rem
