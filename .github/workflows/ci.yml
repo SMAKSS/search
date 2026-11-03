@@ -18,15 +18,11 @@ jobs:
         echo "Head ref: ${{ github.head_ref }}"
         echo "Base ref: ${{ github.base_ref }}"
 
-    - name: Setup Node.js
-      uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
-      with:
-        node-version: "26"
-
-    - name: Setup pnpm and install dependencies
+    - name: Setup pnpm, Node.js, and dependencies
       uses: pnpm/setup@fbda4c85fc2e1e08721cd8763afea8f48d60f024 # v3.0.0
       with:
-        version: 12.17.0
+        runtime: node
+        node-version-file: .nvmrc
         cache: true
         require-lockfile: true
 
