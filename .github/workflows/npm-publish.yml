@@ -11,6 +11,7 @@ jobs:
       contents: write
       issues: write
       pull-requests: write
+      id-token: write
 
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -24,6 +25,9 @@ jobs:
           cache: true
           require-lockfile: true
 
+      - name: Ensure npm CLI supports trusted publishing
+        run: npm install -g npm@11.5.1
+
       - name: Build package
         run: pnpm run generate
 
@@ -31,4 +35,3 @@ jobs:
         run: pnpm run release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}

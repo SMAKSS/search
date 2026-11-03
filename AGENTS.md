@@ -14,7 +14,7 @@
 - Keep security behavior and runtime requirements aligned with Readme.md. Add regression coverage and update docs when behavior changes.
 - Keep playground examples representative of the published package API; do not import private source paths.
 - Use Conventional Commit messages; semantic-release derives versions and release notes from them.
-- semantic-release publishes release-worthy changes to npm and GitHub Packages from the default branch. Do not change versions manually or publish outside that workflow unless explicitly requested.
+- semantic-release publishes release-worthy changes to npm from the default branch. Do not change versions manually or publish outside that workflow unless explicitly requested.
 
 ## Useful commands
 
