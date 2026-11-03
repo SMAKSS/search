@@ -1,6 +1,6 @@
 # Search
 
-![npm](https://img.shields.io/npm/v/@smakss/search) ![NPM](https://img.shields.io/npm/l/@smakss/search) ![npm](https://img.shields.io/npm/dt/@smakss/search) ![npm bundle size (scoped)](https://img.shields.io/bundlephobia/min/@smakss/search)
+![npm](https://img.shields.io/npm/v/@smakss/search) ![NPM](https://img.shields.io/npm/l/@smakss/search) ![npm](https://img.shields.io/npm/dt/@smakss/search) ![npm unpacked size](https://img.shields.io/npm/unpacked-size/%40smakss%2Fsearch)
 
 Searching through arrays, nested arrays, or objects for specific keywords can often be cumbersome, especially when dealing with deeply nested structures. This package simplifies that process by offering a lightweight, flexible search utility that delves into every key of an object or array elements to find matches. It utilizes ES6+ syntax, so if your codebase uses older standards, a transpiler might be required.
 
@@ -12,18 +12,18 @@ Explore the live demonstration available on CodeSandbox:
 
 ## How it works?
 
-To install the package:
+Install the package using npm or pnpm:
 
 ```bash
-npm i @smakss/search
+npm install @smakss/search
 # or
-yarn add @smakss/search
+pnpm add @smakss/search
 ```
 
 For CommonJS modules:
 
 ```js
-const Search = require('@smakss/search');
+const { default: Search } = require('@smakss/search');
 ```
 
 For ECMAScript modules:
@@ -41,6 +41,8 @@ The `Search` function accepts an options object with the following properties:
 - `keys` (`Array`): An array of keys to include or exclude from the search.
 - `include` (`Boolean`): Determines whether to include (`true`) or exclude (`false`) the keys specified. Defaults to `true`.
 - `exact` (`Boolean`): Determines whether to perform an exact match search. Defaults to `false`.
+
+`searchText` is treated as a literal string, including regular expression characters. This keeps user-provided search text from controlling a regular expression.
 
 The search function can take a generic type to specify the type of the search items.
 
@@ -136,3 +138,18 @@ Interested in contributing to this project? Please refer to [CONTRIBUTING.md](./
 ## Code of Conduct
 
 Our community prioritizes the well-being and inclusivity of all contributors and users. Please review our [Code of Conduct](./CODE_OF_CONDUCT.md) to help maintain a supportive environment for everyone.
+
+## Local playground
+
+This repository includes a Vite playground linked to the package through the pnpm workspace. Try the current local build without publishing a package version:
+
+```sh
+pnpm install
+pnpm run dev:playground
+```
+
+To build the playground app, run this from the package root:
+
+```sh
+pnpm run build:playground
+```

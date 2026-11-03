@@ -1,3 +1,4 @@
+import { describe, expect, it } from 'vitest';
 import { searchWithinObject, recursiveSearch } from './search-functions'; // Adjust import path
 
 type Person = { name: string; lastName: string };

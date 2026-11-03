@@ -1,4 +1,4 @@
-import type { SearchItem, KeyOf } from './types';
+import type { SearchItem, KeyOf } from './types.js';
 
 /**
  * Determines whether a given key is included in the search based on the include parameter and the keys provided.

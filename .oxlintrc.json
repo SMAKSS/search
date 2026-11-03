@@ -1,0 +1,73 @@
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "env": {
+    "browser": true,
+    "es6": true
+  },
+  "ignorePatterns": [
+    "dist/**",
+    "commitlint.config.cjs",
+    "lint-staged.config.cjs",
+    "jest.config.cjs"
+  ],
+  "rules": {
+    "eslint/no-inner-declarations": "error",
+    "eslint/no-array-constructor": "error",
+    "eslint/no-undef": "error",
+    "eslint/no-case-declarations": "error",
+    "eslint/no-fallthrough": "error",
+    "eslint/no-unexpected-multiline": "error",
+    "eslint/no-unused-vars": [
+      "error",
+      {
+        "args": "after-used",
+        "argsIgnorePattern": "^$",
+        "vars": "all",
+        "varsIgnorePattern": "^$",
+        "caughtErrors": "none"
+      }
+    ],
+    "typescript/no-explicit-any": "warn",
+    "typescript/ban-ts-comment": "error",
+    "typescript/no-namespace": "error",
+    "typescript/no-require-imports": "error",
+    "typescript/no-unnecessary-type-constraint": "error",
+    "typescript/no-unsafe-function-type": "error",
+    "typescript/no-empty-object-type": [
+      "error",
+      {
+        "allowObjectTypes": "always"
+      }
+    ],
+    "eslint/object-shorthand": "error",
+    "eslint/no-console": "warn"
+  },
+  "overrides": [
+    {
+      "files": ["**/*.ts", "**/*.tsx", "**/*.mts", "**/*.cts"],
+      "rules": {
+        "eslint/no-unused-vars": [
+          "error",
+          {
+            "args": "after-used",
+            "argsIgnorePattern": "^$",
+            "vars": "all",
+            "varsIgnorePattern": "^$",
+            "caughtErrors": "all"
+          }
+        ]
+      }
+    },
+    {
+      "files": ["type-tests/*.cts"],
+      "rules": {
+        "typescript/no-require-imports": [
+          "error",
+          {
+            "allowAsImport": true
+          }
+        ]
+      }
+    }
+  ]
+}

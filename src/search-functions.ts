@@ -1,5 +1,5 @@
-import type { SearchItem, KeyOf } from './types';
-import { addUniqueMatch, isKeyIncluded } from './utils';
+import type { SearchItem, KeyOf } from './types.js';
+import { addUniqueMatch, isKeyIncluded } from './utils.js';
 
 /**
  * Searches for matches within an object based on a regex pattern.

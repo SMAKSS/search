@@ -4,13 +4,13 @@
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "module": "esnext",
-    "moduleResolution": "node",
+    "moduleResolution": "Bundler",
     "outDir": "dist",
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "strict": true,
     "target": "ESNext"
   },
-  "exclude": ["node_modules", "dist"],
+  "exclude": ["node_modules", "dist", "playground"],
   "include": ["*.cjs", "*.js", "**/*.ts"]
 }

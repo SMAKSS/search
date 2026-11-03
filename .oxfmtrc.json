@@ -1,0 +1,22 @@
+{
+  "$schema": "./node_modules/oxfmt/configuration_schema.json",
+  "ignorePatterns": [
+    ".cache",
+    ".shadowenv.d",
+    ".vscode",
+    "build",
+    "dist",
+    "coverage",
+    "node_modules",
+    "public",
+    ".github",
+    "tmp",
+    "*.yml",
+    "pnpm-lock.yaml"
+  ],
+  "singleQuote": true,
+  "printWidth": 80,
+  "tabWidth": 2,
+  "trailingComma": "none",
+  "semi": true
+}

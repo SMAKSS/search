@@ -1,81 +1,95 @@
 {
-  "author": "SMAKSS",
+  "name": "@smakss/search",
+  "version": "2.1.0",
+  "description": "Enhance your searching capabilities with @smakss/search. Effortlessly find keywords in arrays, nested arrays, and objects, perfect for deep search needs in various data structures.",
+  "keywords": [
+    "Array",
+    "CommonJS",
+    "EcmaScript",
+    "Nested array",
+    "Nested object",
+    "Object",
+    "SMAKSS",
+    "Search in arrays",
+    "Search in objects",
+    "Typescript",
+    "advanced-search",
+    "deep-search-arrays",
+    "keyword-finder",
+    "nested-data-search",
+    "npm",
+    "object-search",
+    "search",
+    "yarn"
+  ],
+  "homepage": "https://github.com/SMAKSS/search#readme",
   "bugs": {
     "url": "https://github.com/SMAKSS/search/issues"
   },
-  "description": "Enhance your searching capabilities with @smakss/search. Effortlessly find keywords in arrays, nested arrays, and objects, perfect for deep search needs in various data structures.",
-  "devDependencies": {
-    "@commitlint/cli": "^19.2.1",
-    "@commitlint/config-conventional": "^19.1.0",
-    "@rollup/plugin-commonjs": "^25.0.7",
-    "@rollup/plugin-node-resolve": "^15.2.3",
-    "@rollup/plugin-typescript": "^11.1.6",
-    "@types/jest": "^29.5.12",
-    "@types/node": "^20.12.5",
-    "@typescript-eslint/eslint-plugin": "^7.5.0",
-    "@typescript-eslint/parser": "^7.5.0",
-    "eslint": "^8.56.0",
-    "husky": "^9.0.11",
-    "jest": "^29.7.0",
-    "lint-staged": "^15.2.2",
-    "prettier": "^3.2.5",
-    "rollup": "^4.14.1",
-    "ts-jest": "^29.1.2",
-    "tslib": "^2.6.2",
-    "typescript": "^5.4.4"
-  },
-  "engines": {
-    "node": ">=18.0.0"
-  },
-  "exports": {
-    "import": "./dist/esm/index.js",
-    "require": "./dist/cjs/index.js"
-  },
-  "files": [
-    "dist"
-  ],
-  "homepage": "https://github.com/SMAKSS/search#readme",
-  "keywords": [
-    "advanced-search",
-    "deep-search-arrays",
-    "object-search",
-    "nested-data-search",
-    "keyword-finder",
-    "npm",
-    "yarn",
-    "search",
-    "Array",
-    "Object",
-    "SMAKSS",
-    "CommonJS",
-    "EcmaScript",
-    "Typescript",
-    "Nested array",
-    "Nested object",
-    "Search in arrays",
-    "Search in objects"
-  ],
   "license": "MIT",
-  "main": "dist/cjs/index.js",
-  "module": "dist/esm/index.js",
-  "name": "@smakss/search",
+  "author": "SMAKSS",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/SMAKSS/search.git"
   },
-  "scripts": {
-    "format": "prettier --write \"**/*.+(js|json|yml|yaml|ts|md)\"",
-    "format:check": "prettier -l \"**/*.+(js|json|yml|yaml|ts|md)\"",
-    "generate": "rollup -c",
-    "generate:check": "yarn format && yarn lint && yarn typecheck",
-    "lint": "eslint --cache --cache-location ./node_modules/.cache/.eslintcache --ext js,ts --max-warnings=0 .",
-    "lint:fix": "eslint src/**/*.ts --fix",
-    "setup": "yarn && husky install",
-    "test": "jest",
-    "typecheck": "tsc -b .",
-    "upgrade:deps": "rm -rf node_modules yarn.lock && ncu -u && yarn"
-  },
+  "files": [
+    "dist"
+  ],
   "type": "module",
-  "types": "lib",
-  "version": "2.1.0"
+  "main": "./dist/cjs/index.cjs",
+  "module": "./dist/esm/index.js",
+  "types": "./dist/index.d.cts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.mts",
+        "default": "./dist/esm/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/cjs/index.cjs"
+      }
+    }
+  },
+  "scripts": {
+    "build:playground": "pnpm run generate && pnpm --filter search-playground build",
+    "dev:playground": "pnpm run generate && pnpm --filter search-playground dev",
+    "format": "oxfmt",
+    "format:check": "oxfmt --check",
+    "generate": "vite build && pnpm run generate:types",
+    "generate:types": "tsc -p tsconfig.build.json && node create-declaration-entrypoints.js",
+    "generate:check": "pnpm run format && pnpm run lint && pnpm run typecheck",
+    "lint": "pnpm run lint:main && pnpm run lint:playground",
+    "lint:main": "oxlint --deny-warnings --ignore-pattern 'playground/**' .",
+    "lint:playground": "pnpm --filter search-playground lint",
+    "lint:fix": "oxlint --fix src",
+    "setup": "pnpm install && pnpm exec husky install",
+    "release": "semantic-release",
+    "test": "pnpm run generate && vitest run && node --test test/package-exports.integration.mjs",
+    "typecheck": "tsc -b . && pnpm run generate:types && tsc -p tsconfig.package-types.json && pnpm --filter search-playground typecheck",
+    "typecheck:playground": "pnpm run generate:types && pnpm --filter search-playground typecheck",
+    "upgrade:deps": "ncu -u && pnpm install"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^19.2.1",
+    "@commitlint/config-conventional": "^19.1.0",
+    "@semantic-release/commit-analyzer": "^13.0.1",
+    "@semantic-release/github": "^12.0.3",
+    "@semantic-release/npm": "^13.1.3",
+    "@semantic-release/release-notes-generator": "^14.1.0",
+    "@types/node": "^26.6.6",
+    "husky": "^9.0.11",
+    "lint-staged": "^15.2.2",
+    "oxfmt": "0.75.0",
+    "oxlint": "1.90.0",
+    "semantic-release": "^25.0.3",
+    "tslib": "^2.6.2",
+    "typescript": "^5.9.3",
+    "vite": "^8.3.5",
+    "vitest": "5.0.4"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "packageManager": "pnpm@12.17.0"
 }

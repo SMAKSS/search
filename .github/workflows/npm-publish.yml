@@ -1,74 +1,34 @@
-name: "@smakss/react-scroll-direction"
+name: Release @smakss/search
 
 on:
-  release:
-    types: [created]
+  push:
+    branches: [master]
 
 jobs:
-  build:
+  release:
     runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 18
-      - run: yarn
-      - run: yarn generate
-      - uses: actions/upload-artifact@v4
-        with:
-          name: built-package
-          path: |
-            ./path-to-your-build-folder
-            package.json
+    permissions:
+      contents: write
+      issues: write
+      pull-requests: write
 
-  publish-npm:
-    needs: build
-    runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/download-artifact@v4
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
-          name: built-package
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 18
-          registry-url: https://registry.npmjs.org/
-          scope: "@smakss"
-      - run: yarn install
-      - run: yarn generate
-      - run: |
-          if grep -q "beta" package.json; then
-            echo "Publishing Beta to npm"
-            npm publish --tag beta
-          else
-            echo "Publishing Release to npm"
-            npm publish
-          fi
-        env:
-          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
+          fetch-depth: 0
 
-  publish-gpr:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/download-artifact@v4
+      - uses: pnpm/setup@fbda4c85fc2e1e08721cd8763afea8f48d60f024 # v3.0.0
         with:
-          name: built-package
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 18
-          registry-url: https://npm.pkg.github.com/
-          scope: "@smakss"
-      - run: yarn install
-      - run: yarn generate
-      - run: |
-          if grep -q "beta" package.json; then
-            echo "Publishing Beta to GitHub Package Registry"
-            npm publish --tag beta
-          else
-            echo "Publishing Release to GitHub Package Registry"
-            npm publish
-          fi
+          runtime: node
+          node-version-file: .nvmrc
+          cache: true
+          require-lockfile: true
+
+      - name: Build package
+        run: pnpm run generate
+
+      - name: Run semantic release
+        run: pnpm run release
         env:
-          NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
