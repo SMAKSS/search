@@ -1,6 +1,6 @@
 # Search
 
-![npm](https://img.shields.io/npm/v/@smakss/search) ![NPM](https://img.shields.io/npm/l/@smakss/search) ![npm](https://img.shields.io/npm/dt/@smakss/search) ![npm bundle size (scoped)](https://img.shields.io/bundlephobia/min/@smakss/search)
+![npm](https://img.shields.io/npm/v/@smakss/search) ![NPM](https://img.shields.io/npm/l/@smakss/search) ![npm](https://img.shields.io/npm/dt/@smakss/search) ![npm unpacked size](https://img.shields.io/npm/unpacked-size/%40smakss%2Fsearch)
 
 Searching through arrays, nested arrays, or objects for specific keywords can often be cumbersome, especially when dealing with deeply nested structures. This package simplifies that process by offering a lightweight, flexible search utility that delves into every key of an object or array elements to find matches. It utilizes ES6+ syntax, so if your codebase uses older standards, a transpiler might be required.
 
